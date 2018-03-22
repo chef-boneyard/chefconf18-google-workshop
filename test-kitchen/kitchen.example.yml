@@ -1,0 +1,45 @@
+---
+driver:
+  name: gce
+  project: <%= ENV['GCP_USER'] || "admin" %>
+  zone: us-central1-b
+  email: <%= ENV['GCP_EMAIL'] || "gcp@example.com" %>
+  service_account_scopes:
+    - devstorage.read_write
+    - userinfo.email
+
+transport:
+  username: <%= ENV['USER'] || "admin" %>
+  ssh_key:
+    - ~/.ssh/google_compute_engine
+
+provisioner:
+  name: chef_zero
+  sudo_command: sudo
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7
+    driver:
+      image_project: centos-cloud
+      image_name: centos-7-v20180314
+      metadata:
+        application: centos
+        release: a
+        version: 7
+  - name: ubuntu-16.04
+    driver:
+      image_project: ubuntu-os-cloud
+      image_name: ubuntu-1604-xenial-v20180306
+      metadata:
+        application: ubuntu
+        release: a
+        version: 1604
+
+suites:
+  - name: default
+    run_list:
+      - recipe[gcetest::default]
+    attributes:
