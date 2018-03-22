@@ -1,12 +1,10 @@
-raise "Missing parameter 'CRED_PATH'. Please read docs at #{__FILE__}" \
-  unless ENV.key?('CRED_PATH')
-
 myproject = 'ENTER PROJECT NAME' # <----
 instancename = 'test-machine' # <----
+cred_path = 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
 
 gauth_credential 'mycred' do
   action :serviceaccount
-  path ENV['CRED_PATH'] # e.g. '/path/to/my_account.json'
+  path cred_path
   scopes [
     'https://www.googleapis.com/auth/compute'
   ]
