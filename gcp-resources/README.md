@@ -1,49 +1,75 @@
-# gcp-resources
+# Managing Google Cloud Platform resources
+
+[TOC]
 
 Here is the notes for google's resource cookbooks to drive GCP.
 
 We are going to just focus on Google compute, but there is a huge selection
-of cookbooks to drive building up GCP. Check out [this link](https://supermarket.chef.io/cookbooks?utf8=%E2%9C%93&q=googlecloudplatform&platforms%5B%5D=).
+of cookbooks to drive building up GCP. Check out
+[this link](https://supermarket.chef.io/users/googlecloudplatform).
 
-## google-gcompute
+The Google Compute Engine cookbook is located on
+[Chef Supermarket](https://supermarket.chef.io/cookbooks/google-gcompute).
 
-The cookbook is located [here on the supermarket](https://supermarket.chef.io/cookbooks/google-gcompute).
+
+## Step 1: Install Google Compute Engine cookbook
 
 First thing first, you need to pull down the cookbooks:
 
-```
-mkdir cookbooks
-cd cookbooks
-git init
-git add .
-git commit -m "inital commit"
-knife supermarket install google-cloud
-rm -rf .git/
-cd ..
-```
+    mkdir cookbooks
+    cd cookbooks
+    git init
+    git add .
+    git commit -m "inital commit"
+    knife supermarket install google-cloud
 
-Next you need to create a service account `.json`. I would save it to your `~/` location.
 
-Ok, go ahead and edit the `one_machine.rb` and `one_machine_delete.rb` with your settings and move them.
+## Step 2: Create and download a service account key
 
-```
-vi one_machine.rb
-vi one_machine_delete.rb
-mv one_machine.rb google-gcompute/recipes
-mv one_machine_delete.rb google-gcompute/recipes
-```
+Next you need to create a service account `.json`. Make it administrator of the
+services you will manage. For simplicity in this tutorial make it `Owner` or
+`Editor`.
 
-Run the command to spin up a machine!
+I would save it to your `~/` location, i.e. `gcp_creds.json`.
 
-```
-CRED_PATH=~/SOMEAWESOMENAME-8dd45fc19cc2.json chef-client -z -r "recipe[google-gcompute::one_machine]"
-```
+Tip: Protect this file as it contains the key to all your services:
+
+    chmod 600 ~/gcp_creds.json
+
+
+## Step 3: Create a cookbook to hold your recipes
+
+You should have a cookbook to hold the recipes appropriate for your deployment.
+In this tutorial we'll call ours `my-gcp-infra` but it can be anything you'd
+like.
+
+    chef generate cookbook ~/cookbooks/my-gcp-infra
+
+
+## Step 4: Create (or modify an existing) recipe for your deployment
+
+Ok, go ahead and edit the `one_machine.rb` and `one_machine_delete.rb` with your
+settings and move them to your cookbook (created in the previous step):
+
+    vi one_machine.rb
+    vi one_machine_delete.rb
+    mv one_machine.rb ~/cookbooks/my-gcp-infra/recipes
+    mv one_machine_delete.rb ~/cookbooks/my-gcp-infra/recipes
+
+
+## Step 5: Apply the recipe and spin up your machine
+
+Run the command to spin up a machine:
+
+    chef-client -z -r "recipe[my-gcp-infra::one_machine]"
 
 When it succeeds run the command to delete the machine:
 
-```
-CRED_PATH=~/SOMEAWESOMENAME-8dd45fc19cc2.json chef-client -z -r "recipe[google-gcompute::one_machine_delete]"
-```
+    chef-client -z -r "recipe[my-gcp-infra::one_machine_delete]"
 
-When this happens now you can programaticlly declare what you want with GCP with these cookbooks.
-Go ahead and use the `one_machine` recipe and extend it to two machines of 4 gigs.
+
+## What's next?
+
+Now you can programaticlly declare what you want with GCP with these cookbooks.
+Go ahead and use the `one_machine` recipe and extend it to two machines of 4
+gigs.
