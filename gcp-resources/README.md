@@ -1,7 +1,5 @@
 # Managing Google Cloud Platform resources
 
-[TOC]
-
 Here is the notes for google's resource cookbooks to drive GCP.
 
 We are going to just focus on Google compute, but there is a huge selection
