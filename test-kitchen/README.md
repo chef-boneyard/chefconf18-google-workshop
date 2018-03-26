@@ -25,16 +25,25 @@ Take a look at the `kitchen.example.yml` here, you'll see that it's pretty stand
 
 Ok, now go into the vim-cookbook directory. Run the following commands:
 
+### Verify you have everything setup
+
 ```
-# verify you have everything setup
 kitchen list
+```
 
-# run in verification mode
+### Run in verification mode
+
+```
 kitchen verify -c 2
+```
 
-# clean up your machines
+### Clean up your machines
+
+```
 kitchen destroy
+```
 
-# run the one command!
+### Run the one command!
+```
 kitchen test -c 2
 ```
