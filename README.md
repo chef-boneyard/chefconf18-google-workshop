@@ -8,6 +8,7 @@ This is the code and cheat sheets for the Chef Conf 2018 GCP workshop.
 - [`knife`](knife/) - Files to help with knife and GCP
 - [`test-kitchen`](test-kitchen/) - Files to help with using test-kitchen and GCP
 - [`gcp-resources`](gcp-resources/) - Files and examples for generic GCP resources and Chef recipes
+- [`terraform-gcp`](terraform-gcp/) - Files and examples for terraform GCP and Chef recipes
 
 ## License and Authors
 - Author:: JJ Asghar (jj@chef.io)
