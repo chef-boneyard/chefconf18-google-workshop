@@ -9,6 +9,9 @@ This is the code and cheat sheets for the Chef Conf 2018 GCP workshop.
 - [`test-kitchen`](test-kitchen/) - Files to help with using test-kitchen and GCP
 - [`google-cookboooks`](google-cookbooks/) - Files and examples for generic GCP resources and Chef recipes
 - [`terraform-gcp`](terraform-gcp/) - Files and examples for terraform GCP and Chef recipes
+- Inspec
+  * [`inspec-gcp`](inspec-gcp/)
+  * [`inspec-terraform`](inspec-terraform/)
 
 ## License and Authors
 - Author:: Nelson Araujo (nelsona@google.com)
