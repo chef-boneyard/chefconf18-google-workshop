@@ -1,6 +1,6 @@
-myproject = 'ENTER PROJECT NAME' # <----
-instancename = 'test-machine' # <----
-cred_path = 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
+myproject = ENV['PROJECT'] || 'ENTER PROJECT NAME' # <----
+instancename = ENV['INSTANCE'] || 'test-machine' # <----
+cred_path = ENV['CRED_PATH'] || 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
 
 gauth_credential 'mycred' do
   action :serviceaccount

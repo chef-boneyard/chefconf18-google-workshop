@@ -1,6 +1,6 @@
-myproject = "ENTER PROJECT HERE" # <----
-instancename = 'test-machine' # <----
-cred_path = 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
+myproject = ENV['PROJECT'] || 'ENTER PROJECT NAME' # <----
+instancename = ENV['INSTANCE'] || 'test-machine' # <----
+cred_path = ENV['CRED_PATH'] || 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
 
 gauth_credential 'mycred' do
   action :serviceaccount
@@ -24,7 +24,7 @@ gcompute_disk 'instance-test-os-1' do
   credential 'mycred'
 end
 
-gcompute_network 'mynetwork-test' do
+gcompute_network 'default' do
   action :create
   project myproject
   credential 'mycred'
@@ -62,7 +62,7 @@ gcompute_instance instancename do
   ]
   network_interfaces [
     {
-      network: 'mynetwork-test',
+      network: 'default',
       access_configs: [
         {
           name: 'External NAT',
