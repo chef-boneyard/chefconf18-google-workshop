@@ -4,7 +4,7 @@
 #
 
 myproject = ENV['PROJECT'] || 'ENTER PROJECT NAME' # <----
-instancename = ENV['INSTANCE'] || 'test-machine' # <----
+appname = ENV['APP_NAME'] || 'my-app' # <----
 cred_path = ENV['CRED_PATH'] || 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
 
 gauth_credential 'mycred' do
@@ -21,7 +21,7 @@ gcompute_zone 'us-west1-a' do
   credential 'mycred'
 end
 
-gcompute_instance instancename do
+gcompute_instance appname do
   action :delete
   zone 'us-west1-a'
   project myproject
