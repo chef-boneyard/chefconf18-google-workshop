@@ -4,7 +4,7 @@
 #
 
 myproject = ENV['PROJECT'] || 'ENTER PROJECT NAME' # <----
-instancename = ENV['INSTANCE'] || 'test-machine' # <----
+appname = ENV['APP_NAME'] || 'my-app' # <----
 cred_path = ENV['CRED_PATH'] || 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
 
 gauth_credential 'mycred' do
@@ -25,7 +25,7 @@ end
 # gcompute_image_family function can be used in gcompute_disk blocks.
 ::Chef::Resource.send(:include, Google::Functions)
 
-gcompute_disk 'instance-test-os-1' do
+gcompute_disk "#{appname}-os-1" do
   action :create
   source_image gcompute_image_family('ubuntu-1604-lts', 'ubuntu-os-cloud')
   zone 'us-west1-a'
@@ -45,7 +45,7 @@ gcompute_region 'us-west1' do
   credential 'mycred'
 end
 
-gcompute_address 'instance-test-ip' do
+gcompute_address appname do
   action :create
   region 'us-west1'
   project myproject
@@ -59,29 +59,33 @@ gcompute_machine_type 'n1-standard-8' do
   credential 'mycred'
 end
 
-gcompute_instance instancename do
+gcompute_instance appname do
   action :create
   machine_type 'n1-standard-8'
   disks [{
     boot: true,
     auto_delete: true,
-    source: 'instance-test-os-1'
+    source: "#{appname}-os-1"
   }]
   network_interfaces [{
     network: 'default',
     access_configs: [{
       name: 'External NAT',
-      nat_ip: 'instance-test-ip',
+      nat_ip: appname,
       type: 'ONE_TO_ONE_NAT'
     }]
   }]
   zone 'us-west1-a'
   project myproject
   credential 'mycred'
+  metadata ({
+    'startup-script' => File.read(File.join(__dir__, "../files/bootstrap.sh"))
+  })
   tags ({
+    # TODO(nelsonjr): Add encoder to remove "items" from tags array
+    # https://github.com/GoogleCloudPlatform/magic-modules/issues/179
     items: [
       'http-server',
-      'https-server'
     ]
-  })
+ })
 end
