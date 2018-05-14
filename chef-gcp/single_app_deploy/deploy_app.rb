@@ -45,7 +45,7 @@ gcompute_region 'us-west1' do
   credential 'mycred'
 end
 
-gcompute_address "#{appname}-ip" do
+gcompute_address appname do
   action :create
   region 'us-west1'
   project myproject
@@ -71,7 +71,7 @@ gcompute_instance appname do
     network: 'default',
     access_configs: [{
       name: 'External NAT',
-      nat_ip: "#{appname}-ip",
+      nat_ip: appname,
       type: 'ONE_TO_ONE_NAT'
     }]
   }]
