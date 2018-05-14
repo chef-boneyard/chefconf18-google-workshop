@@ -79,12 +79,11 @@ gcompute_instance appname do
   project myproject
   credential 'mycred'
   metadata ({
-    items: [{
-      key: 'startup-script',
-      value: File.read(File.join(__dir__, "../files/bootstrap.sh"))
-    }]
+    'startup-script' => File.read(File.join(__dir__, "../files/bootstrap.sh"))
   })
   tags ({
+    # TODO(nelsonjr): Add encoder to remove "items" from tags array
+    # https://github.com/GoogleCloudPlatform/magic-modules/issues/179
     items: [
       'http-server',
     ]
