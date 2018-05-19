@@ -67,6 +67,15 @@ Visit the external IP address of the machine created. You can retrieve the
 IP address in the Developer Console or by running
 `gcloud compute instances list`.
 
+# Step 7: Deleting the deployment
+
+Simply run the `down_app` recipe:
+
+```
+chef-client -z --runlist 'recipe[chef-gcp-workshop::down_app]'
+```
+
+
 ## What's next?
 
 Next you can change this application to become a multi-instance, load
