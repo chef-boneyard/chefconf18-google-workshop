@@ -33,10 +33,10 @@ Tip: Protect this file as it contains the key to all your services:
 ## Step 3: Create a cookbook to hold your recipes
 
 You should have a cookbook to hold the recipes appropriate for your deployment.
-In this tutorial we'll call ours `my-gcp-infra` but it can be anything you'd
+In this tutorial we'll call ours `chef-gcp-workshop` but it can be anything you'd
 like.
 
-    chef generate cookbook ~/cookbooks/my-gcp-infra
+    chef generate cookbook ~/cookbooks/chef-gcp-workshop
 
 
 ## Step 4: Create (or modify an existing) recipe for your deployment
@@ -47,9 +47,9 @@ settings and move them to your cookbook (created in the previous step):
     vi up_lnb_app.rb
     vi up_lnb_app_step_2.rb
     vi down_lnb_app.rb
-    mv up_lnb_app.rb ~/cookbooks/my-gcp-infra/recipes
-    mv up_lnb_app_step_2.rb ~/cookbooks/my-gcp-infra/recipes
-    mv down_lnb_app.rb ~/cookbooks/my-gcp-infra/recipes
+    mv up_lnb_app.rb ~/cookbooks/chef-gcp-workshop/recipes
+    mv up_lnb_app_step_2.rb ~/cookbooks/chef-gcp-workshop/recipes
+    mv down_lnb_app.rb ~/cookbooks/chef-gcp-workshop/recipes
 
 
 ## Step 5: Apply the recipe and spin up your machine

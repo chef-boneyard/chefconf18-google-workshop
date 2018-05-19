@@ -38,10 +38,10 @@ Tip: Protect this file as it contains the key to all your services:
 ## Step 3: Create a cookbook to hold your recipes
 
 You should have a cookbook to hold the recipes appropriate for your deployment.
-In this tutorial we'll call ours `my-gcp-infra` but it can be anything you'd
+In this tutorial we'll call ours `chef-gcp-workshop` but it can be anything you'd
 like.
 
-    chef generate cookbook ~/cookbooks/my-gcp-infra
+    chef generate cookbook ~/cookbooks/chef-gcp-workshop
 
 
 ## Step 4: Create (or modify an existing) recipe for your deployment
@@ -51,19 +51,19 @@ settings and move them to your cookbook (created in the previous step):
 
     vi one_machine.rb
     vi one_machine_delete.rb
-    mv one_machine.rb ~/cookbooks/my-gcp-infra/recipes
-    mv one_machine_delete.rb ~/cookbooks/my-gcp-infra/recipes
+    mv one_machine.rb ~/cookbooks/chef-gcp-workshop/recipes
+    mv one_machine_delete.rb ~/cookbooks/chef-gcp-workshop/recipes
 
 
 ## Step 5: Apply the recipe and spin up your machine
 
 Run the command to spin up a machine:
 
-    chef-client -z -r "recipe[my-gcp-infra::one_machine]"
+    chef-client -z -r "recipe[chef-gcp-workshop::one_machine]"
 
 When it succeeds run the command to delete the machine:
 
-    chef-client -z -r "recipe[my-gcp-infra::one_machine_delete]"
+    chef-client -z -r "recipe[chef-gcp-workshop::one_machine_delete]"
 
 
 ## What's next?
