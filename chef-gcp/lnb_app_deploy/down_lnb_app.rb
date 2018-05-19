@@ -53,6 +53,20 @@ gcompute_instance_template appname do
   credential 'mycred'
 end
 
+gcompute_forwarding_rule appname do
+  action :delete
+  region 'us-west1'
+  project myproject
+  credential 'mycred'
+end
+
+gcompute_target_pool appname do
+  action :delete
+  region 'us-west1'
+  project myproject
+  credential 'mycred'
+end
+
 gcompute_http_health_check appname do
   action :delete
   project myproject
@@ -62,6 +76,12 @@ end
 gcompute_address appname do
   action :delete
   region 'us-west1'
+  project myproject
+  credential 'mycred'
+end
+
+gcompute_firewall appname do
+  action :delete
   project myproject
   credential 'mycred'
 end
