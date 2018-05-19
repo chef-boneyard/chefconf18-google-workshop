@@ -77,7 +77,13 @@ gcompute_instance_template "#{appname}-tpl" do
           }
         ]
       }
-    ]
+    ],
+    tags: {
+      items: [
+        appname,
+        'http-server'
+      ]
+    }
   )
   project myproject
   credential 'mycred'
@@ -123,19 +129,35 @@ gcompute_address "#{appname}-lnb-ip" do
   credential 'mycred'
 end
 
-cred = ::Google::Functions.gauth_credential_serviceaccount_for_function(
-  cred_path,
-  ['https://www.googleapis.com/auth/compute']
-)
-
-gcompute_forwarding_rule "#{appname}-fwd" do
+# TODO(nelsonjr): Remove 'http-server' tag from the template and change the
+# comment below to reflect that we protected the machines.
+#
+# This firewall rule would be redundant as our service is already open to the
+# Internet. However, for more locked down scenarios, e.g. when only traffic from
+# your corporate network is allowed, you still want to allow the health checkers
+# to reach your endpoints and assert health.
+#
+# This rule is also useful if you have a load balancer that has internet access,
+# but you do not want direct connection from the Internet to the machine (this
+# is preferred to shield the machines from the outside).
+gcompute_firewall "#{appname}-fw" do
   action :create
-  fr_label appname
-  ip_address gcompute_address_ip(appname, 'us-west1', myproject, cred)
-  ip_protocol 'TCP'
-  port_range '80'
-  target "#{appname}-tp"
-  region 'us-west1'
+  f_label appname
+  allowed [
+    {
+      ip_protocol: 'tcp',
+      ports: [ '80' ]
+    }
+  ]
+  target_tags [
+    appname
+  ]
+  source_ranges [
+    '209.85.152.0/22',
+    '209.85.204.0/22',
+    '35.191.0.0/16',
+    '130.211.0.0/22'
+  ]
   project myproject
   credential 'mycred'
 end
