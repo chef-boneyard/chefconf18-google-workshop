@@ -14,8 +14,9 @@ The Google Compute Engine cookbook is located on
 
 First thing first, you need to pull down the cookbooks:
 
-    mkdir -p ~/.chef/cookbooks
-    cd ~/.chef/cookbooks
+    mkdir cookbooks
+    cd cookbooks
+    touch README.me
     git init
     git add .
     git commit -m "inital commit"
