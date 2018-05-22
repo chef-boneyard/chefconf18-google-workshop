@@ -23,6 +23,8 @@ chef gem install kitchen-google
 
 Take a look at the `kitchen.example.yml` here, you'll see that it's pretty standard when it comes to kitchen.
 
+If you're using Cloud Shell, run `gcloud config list` to get the email address for kitchen.yml
+
 Ok, now go into the vim-cookbook directory. Run the following commands:
 
 ### Verify you have everything setup
