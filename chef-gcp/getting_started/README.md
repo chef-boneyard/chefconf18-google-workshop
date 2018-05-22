@@ -16,6 +16,7 @@ First thing first, you need to pull down the cookbooks:
 
     mkdir cookbooks
     cd cookbooks
+    touch README.me
     git init
     git add .
     git commit -m "inital commit"
