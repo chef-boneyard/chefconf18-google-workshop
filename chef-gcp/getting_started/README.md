@@ -53,13 +53,11 @@ You'll also need to make sure that your cookbook depends on the proper google co
 
 ## Step 4: Create (or modify an existing) recipe for your deployment
 
-Ok, go ahead and edit the `one_machine.rb` and `one_machine_delete.rb` with your
-settings and move them to your cookbook (created in the previous step):
+Ok, go ahead and copy `one_machine.rb` and `one_machine_delete.rb` to your
+cookbook (created in the previous step):
 
-    vi one_machine.rb
-    vi one_machine_delete.rb
-    mv one_machine.rb ~/.chef/cookbooks/chef-gcp-workshop/recipes
-    mv one_machine_delete.rb ~/.chef/cookbooks/chef-gcp-workshop/recipes
+    cp one_machine.rb ~/.chef/cookbooks/chef-gcp-workshop/recipes
+    cp one_machine_delete.rb ~/.chef/cookbooks/chef-gcp-workshop/recipes
 
 
 ## Step 5: Apply the recipe and spin up your machine
