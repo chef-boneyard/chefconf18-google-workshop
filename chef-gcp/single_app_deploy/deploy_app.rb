@@ -3,9 +3,9 @@
 # |___ |  | |___ |    |___ |__| | \| |
 #
 
-myproject = 'ENTER PROJECT NAME' # <----
+myproject = ENV['PROJECT'] || 'ENTER PROJECT NAME'
 appname = 'my-app' # <----
-cred_path = 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
+cred_path = ENV['CRED_PATH'] || 'ENTER PATH TO YOUR CREDENTIAL HERE' # <----
 
 gauth_credential 'mycred' do
   action :serviceaccount

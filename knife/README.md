@@ -49,11 +49,11 @@ Note: This will bootstrap the `chef-client` and connect the client to the chef-s
 one set up. There is your Day 1 provisioning!
 
 ```
-knife google server create test-instance-1 --gce-image ubuntu-1604-lts  --gce-machine-type n1-standard-2 --gce-public-ip ephemeral --ssh-user jjasghar --identity-file /Users/jjasghar/.ssh/google_compute_engine
+knife google server create test-instance-1 --gce-image ubuntu-1604-lts  --gce-machine-type n1-standard-2 --gce-public-ip ephemeral --ssh-user `whoami` --identity-file ~/.ssh/google_compute_engine
 ```
 
 ```
-knife google server create test-instance-1 --gce-image centos-7 --gce-machine-type n1-standard-2 --gce-public-ip ephemeral --ssh-user jjasghar --identity-file /Users/jjasghar/.ssh/google_compute_engine
+knife google server create test-instance-1 --gce-image centos-7 --gce-machine-type n1-standard-2 --gce-public-ip ephemeral --ssh-user `whoami` --identity-file ~/.ssh/google_compute_engine
 ```
 
 ### Delete instance
@@ -61,3 +61,13 @@ knife google server create test-instance-1 --gce-image centos-7 --gce-machine-ty
 ```
 knife google server delete test-instance-1 -P -y
 ```
+
+# Auth issues?
+```
+RuntimeError: Cloud not load the default credentials.
+```
+
+If you're getting this message, it means that you do not have an application configuration file at ~/.config/gcloud/application_default_credentials.json
+
+Run `gcloud auth application-default login` to generate the proper config files.
+
