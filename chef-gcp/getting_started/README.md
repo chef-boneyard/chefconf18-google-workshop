@@ -19,7 +19,8 @@ First thing first, you need to pull down the cookbooks:
     git init
     git add .
     git commit -m "inital commit"
-    knife supermarket install google-cloud
+    knife supermarket install google-gcompute
+    knife supermarket install google-gauth
 
 
 ## Step 2: Create and download a service account key
@@ -42,6 +43,11 @@ In this tutorial we'll call ours `chef-gcp-workshop` but it can be anything you'
 like.
 
     chef generate cookbook ~/.chef/cookbooks/chef-gcp-workshop
+
+You'll also need to make sure that your cookbook depends on the proper google cookbooks. Add the following lines to ~/.chef/cookbooks/chef-gcp-workshop/metadata.rb
+
+    depends 'google-gauth'
+    depends 'google-gcompute'
 
 
 ## Step 4: Create (or modify an existing) recipe for your deployment
