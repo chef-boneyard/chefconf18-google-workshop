@@ -14,8 +14,8 @@ The Google Compute Engine cookbook is located on
 
 First thing first, you need to pull down the cookbooks:
 
-    mkdir cookbooks
-    cd cookbooks
+    mkdir -p ~/.chef/cookbooks
+    cd ~/.chef/cookbooks
     git init
     git add .
     git commit -m "inital commit"
@@ -41,7 +41,7 @@ You should have a cookbook to hold the recipes appropriate for your deployment.
 In this tutorial we'll call ours `chef-gcp-workshop` but it can be anything you'd
 like.
 
-    chef generate cookbook ~/cookbooks/chef-gcp-workshop
+    chef generate cookbook ~/.chef/cookbooks/chef-gcp-workshop
 
 
 ## Step 4: Create (or modify an existing) recipe for your deployment
@@ -51,19 +51,19 @@ settings and move them to your cookbook (created in the previous step):
 
     vi one_machine.rb
     vi one_machine_delete.rb
-    mv one_machine.rb ~/cookbooks/chef-gcp-workshop/recipes
-    mv one_machine_delete.rb ~/cookbooks/chef-gcp-workshop/recipes
+    mv one_machine.rb ~/.chef/cookbooks/chef-gcp-workshop/recipes
+    mv one_machine_delete.rb ~/.chef/cookbooks/chef-gcp-workshop/recipes
 
 
 ## Step 5: Apply the recipe and spin up your machine
 
 Run the command to spin up a machine:
 
-    chef-client -z -r "recipe[chef-gcp-workshop::one_machine]"
+    CRED_PATH=<path to service account file> PROJECT=<project name> chef-client -z -r "recipe[chef-gcp-workshop::one_machine]"
 
 When it succeeds run the command to delete the machine:
 
-    chef-client -z -r "recipe[chef-gcp-workshop::one_machine_delete]"
+    CRED_PATH=<path to service account file> PROJECT=<project name> chef-client -z -r "recipe[chef-gcp-workshop::one_machine_delete]"
 
 
 ## What's next?
