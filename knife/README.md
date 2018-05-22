@@ -61,3 +61,13 @@ knife google server create test-instance-1 --gce-image centos-7 --gce-machine-ty
 ```
 knife google server delete test-instance-1 -P -y
 ```
+
+# Auth issues?
+```
+RuntimeError: Cloud not load the default credentials.
+```
+
+If you're getting this message, it means that you do not have an application configuration file at ~/.config/gcloud/application_default_credentials.json
+
+Run `gcloud auth application-default login` to generate the proper config files.
+
